@@ -1,0 +1,9 @@
+#!/bin/sh
+
+current_name=$(bspc query -D -d .focused --names)
+
+current_pos=$(bspc query -D -d .occupied --names)
+
+active=$(bspc query -D -d .occupied --names | rofi -mesg "<span foreground='#4975d5'> Sensei, We are currently occupying  </span>" -dmenu -theme ~/.config/rofi/switch_window.rasi -no-fixed-num-lines -yoffset "-0" -kb-accept-entry "!Alt-Escape,!Alt+Alt_L" -kb-row-down "Alt+Escape" -kb-row-up "Alt+F1" )
+
+bspc desktop --focus $active

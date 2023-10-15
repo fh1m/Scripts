@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+word=$(rofi -dmenu -no-fixed-num-lines -i -width "300" -p " Urban Dictionary " -yoffset "-490" -xoffset "-795")
+
+if [[ -z "$word" ]];
+then
+  exit 1
+else
+  notify-send "$(ud -n 1 $word | sed 's/\x1b\[[0-9;]*m//g')" -i "lol" -t 1000000
+fi

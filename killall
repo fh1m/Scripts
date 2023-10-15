@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+process=$( ps --user "$USER" --sort=-pcpu | sed '1d' | awk '{ print $4 }' | sort | uniq | rofi -dmenu -i -p ' Kill ' -theme ~/.config/rofi/generic.rasi )
+pid=$(pidof $process)
+kill -9 $pid

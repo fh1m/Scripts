@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+
+mpc update >/dev/null 2>/dev/null
+
+top=~/Music/Albums/
+artist=$(echo -e "$(ls -t $top)\n[Back]" | rofi -dmenu -p " Artists " -i -width "250" -yoffset "-340" -xoffset "-550" -lines '22' -no-fixed-num-lines)
+
+if [[ -z "$artist" ]];
+then
+  exit 1
+elif [[ $artist == "[Back]" ]];
+then
+  rofi-mpc && exit 1
+else
+  album=$(echo -e "$(ls $top"$artist")\n[Back]" | rofi -dmenu -p " Albums " -i -lines '20' -width "250" -yoffset "-190" -xoffset "-470" -no-fixed-num-lines )
+  if [[ -z "$album" ]];
+  then
+    exit 1
+  elif [[ $album == "[Back]" ]];
+  then
+    ~/.scripts/mpd_albums && exit 1
+  else
+  find $top | grep "$artist" | grep "$album" | grep ".mp3" | cut -c 18- | sort -V >> ~/.config/mpd/playlists/album.m3u
+  mpc clear
+  mpc load album
+  mpc random false
+  rm ~/.config/mpd/playlists/album.m3u
+  mpc play
+  fi
+fi

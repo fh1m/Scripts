@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+playlist=$(mpc lsplaylists | rofi -dmenu -p " Playlists " -i -lines "28" -width "25" -yoffset "-330" -xoffset "-498" -no-fixed-num-lines )
+
+if [[ -z $playlist ]];
+then
+  exit 0
+else
+  mpc clear
+  mpc load "$playlist"
+  mpc shuffle
+  mpc play
+fi

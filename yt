@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+# menu Items
+chosen=$(echo -e "Youtube\nHistory\nAudio" | rofi -dmenu -p " youtube " -theme ~/.config/rofi/generic.rasi)
+
+case $chosen in
+  Youtube)
+    ~/.scripts/Search/youtube-suggest
+    ;;
+  History)
+    ytfzf -DHNf
+    ;;
+  Audio)
+    ytfzf -NDfm
+    ;;
+esac

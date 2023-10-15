@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+bspc desktop -f 'Music'
+bash ~/.config/polybar/scripts/player &
+bash ~/.config/polybar/scripts/music &
+bash ~/.config/polybar/scripts/lyrics &

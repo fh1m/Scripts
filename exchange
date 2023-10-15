@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+from=$(forx --list | tr , '\n'| tr -d ' ' | rofi -dmenu -i -p ' From ' -theme ~/.config/rofi/generic.rasi )
+
+if [[ -z $from ]];
+then
+  exit 1
+else
+  to=$(forx --list | tr , '\n'| tr -d ' ' | rofi -dmenu -i -p ' To ' -theme ~/.config/rofi/generic.rasi )
+  if [[ -z $to ]];
+  then
+    exit
+  else
+    amount=$(rofi -dmenu -i -p " Ammount "  -theme ~/.config/rofi/generic.rasi )
+    if [[ -z $amount ]];
+    then
+      exit 1
+    else
+      notify-send "Currency Exchange" "$amount $from is $(forx $from $to -q $amount) $to" -i ~/Pictures/.icons/exchange.png -t 100000
+    fi
+  fi
+fi

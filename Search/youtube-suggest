@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+text=$(~/.scripts/Search/suggest youtube)
+
+if [[ -z "$text" ]];
+then
+  exit 1
+else
+  ytfzf -DNf "$text"
+fi

@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+# List Sinks
+# sinks=$(pactl list sinks short | awk '{print $2}' | rofi -dmenu -no-fixed-num-lines -mesg " Ativate sound source " -width "800" -theme ~/.config/rofi/generic-noinput.rasi )
+sinks=$(pactl list sinks short | awk '{print $2}' | dmenu -p 'Chose Sound Source' -fn 'Iosevka Nerd Font:style=Bold:pixelsize=18;2:antialias=true' -sb '#004eff' -nf '#8bb9f6' -l 2)
+
+# Choose Sink
+pactl set-default-sink "$sinks"
